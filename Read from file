@@ -8,20 +8,20 @@ import org.omg.CORBA.portable.InputStream;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Solution {
     public static void main(String[] args) throws IOException{
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String name = reader.readLine();
         ArrayList<Integer> arrayList = new ArrayList<Integer>();
-        BufferedReader in = new BufferedReader(new FileReader(name));
+        try{BufferedReader fileReader = new BufferedReader(new InputStreamReader(new FileInputStream(name)));
         String currentLine;
-        while ((currentLine = in.readLine()) != null){
+        while ((currentLine = fileReader.readLine()) != null){
             int data = Integer.parseInt(currentLine);
             arrayList.add(data);
         }
-        in.close();
-        reader.close();
+
         ArrayList<Integer> arrayListfinal1 = new ArrayList<Integer>();
         for (int i = 0; i <arrayList.size(); i++){
             if (arrayList.get(i)%2 == 0){arrayListfinal1.add(arrayList.get(i));}
@@ -41,6 +41,13 @@ public class Solution {
         }
         for (int i = 0; i < arrayListfinal.length; i++){
         System.out.println(arrayListfinal[i]);}
+        fileReader.close();
+        reader.close();}
+        catch (FileNotFoundException e){
+            System.out.println("File Not Found!");
+        } catch (IOException e) {
+            System.out.println("Can't read File");
+        }
         // напишите тут ваш код
     }
 }
